@@ -26,7 +26,7 @@ class FirstScreen extends StatelessWidget {
         Row(children: <Widget>[
           Expanded(
               child: Text(
-            "Navana",
+            "Na",
             style: TextStyle(
                 fontSize: 40.0, fontFamily: 'MetalMania', color: Colors.blue),
           )),
@@ -60,7 +60,7 @@ class FlightImage extends StatelessWidget {
     var image = Image(image: assetImage);
     return Container(
       child: image,
-      padding: EdgeInsets.only(top:20.0,bottom: 20.0),
+      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
     );
   }
 }
@@ -93,7 +93,6 @@ class FlightButton extends StatelessWidget {
       title: Text("Flight successful"),
       content: Text("Have a pleasant Flight"),
     );
-
     showDialog(context: context, builder: (BuildContext context) => alert);
   }
 }
