@@ -26,7 +26,7 @@ class FirstScreen extends StatelessWidget {
         Row(children: <Widget>[
           Expanded(
               child: Text(
-            "Na",
+            "Navana biman",
             style: TextStyle(
                 fontSize: 40.0, fontFamily: 'MetalMania', color: Colors.blue),
           )),
