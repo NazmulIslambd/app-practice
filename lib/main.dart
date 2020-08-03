@@ -19,21 +19,21 @@ class MyHome extends StatelessWidget {
 }
 
 List<String> getListElement() {
-  var items = List<String>.generate(30, (country) => "Item $country");
+  var items = List<String>.generate(20, (country) => "Item $country");
   return items;
 }
 
 Widget getListView() {
-  var listItems = getListElement();
+  var listItem = getListElement();
 
   var listView = ListView.builder(
-      itemCount: listItems.length,
+      itemCount: listItem.length,
       itemBuilder: (context, index) {
         return ListTile(
           leading: Icon(Icons.arrow_right),
-          title: Text(listItems[index]),
+          title: Text(listItem[index]),
           onTap: () {
-            debugPrint('${listItems[index]} was tapped');
+            debugPrint('${listItem[index]} was tapped');
           },
         );
       });
