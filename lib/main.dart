@@ -1,81 +1,56 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyHome());
-
-class MyHome extends StatelessWidget {
+void main()=>runApp(Home());
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Stateful App",
       debugShowCheckedModeBanner: false,
-      title: "Flutter Long List",
-      home: SafeArea(
-          child: Scaffold(
-        appBar: AppBar(
-          title: Text("Long List View"),
-        ),
-        body: getListView(),
-
-
-        //  This code declear for floating Button
-
-        /* floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            debugPrint("FAB Clicked");
-          },
-          child: Icon(Icons.add),
-          tooltip: 'Add One more Item',*/
-
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            debugPrint("FAB Clicked");
-          },
-          child: Icon(Icons.add),
-          tooltip: 'Add one More Item',
-        ),
+      home: SafeArea(child: Scaffold(
+        appBar: AppBar (title: (Text("Stateful")),),
+        body :FavouriteCity()
       )),
+
     );
   }
 }
-//  function writing for create SnackBar
-
-void showSnackBar(BuildContext context, String listItem) {
-  var snackBar = SnackBar(
-    content: Text("$listItem was tapped"),
-
-    //  action use for show button on Snackbar
-    action: SnackBarAction(
-        label: "UNDO",
-        onPressed: () {
-          debugPrint("Performing dummy UNDO operation");
-        }),
-  );
-
-  // scaffold declear for show snackbar
-
-  Scaffold.of(context).showSnackBar(snackBar); //always declaer beneth FloatingActionButton
+class FavouriteCity extends StatefulWidget {
+  @override
+  _FavouriteCityState createState() => _FavouriteCityState();
 }
 
-List<String> getListElement() {
-  var items = List<String>.generate(20, (country) => "Item $country");
-  return items;
+class _FavouriteCityState extends State<FavouriteCity> {
+ String nameCity ="";
+
+  @override
+  Widget build(BuildContext context) {
+    debugPrint(
+      "Favorite city Widget is created"
+    );
+    return Container(
+      margin: EdgeInsets.all(20.0),
+      child: Column(
+        children: <Widget>[
+          TextField(onChanged: (String userInput){  //  replace onChanged by onSubmitted
+            setState(() {
+              debugPrint("set state is called , this tells framwork to redraw the favoite widget"); //  debugPrint called for testing pourpos.
+              nameCity = userInput;
+            });
+
+          },),
+          Padding(
+            padding:EdgeInsets.all(30.0),
+            child:  Text("your best city is $nameCity",style: TextStyle(fontSize: 20),),
+
+          )
+
+
+        ],
+      ),
+    );
+  }
 }
 
-Widget getListView() {
-  var listItem = getListElement();
 
-  var listView = ListView.builder(
-      itemCount: listItem.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(Icons.arrow_right),
-          title: Text(listItem[index]),
-          onTap: () {
-            debugPrint('${listItem[index]} was tapped');
-
-//         here we declear  this code for collect items
-            showSnackBar(context, listItem[index]);
-          },
-        );
-      });
-  return listView;
-}
