@@ -1,56 +1,75 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-void main()=>runApp(Home());
+void main() => runApp(Home());
+
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Stateful App",
       debugShowCheckedModeBanner: false,
-      home: SafeArea(child: Scaffold(
-        appBar: AppBar (title: (Text("Stateful")),),
-        body :FavouriteCity()
+      title: 'Stateful Widget',
+      home: SafeArea(
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text("Stateful App"),
+            ),
+            body: FavoriteCity(),
       )),
-
     );
   }
 }
-class FavouriteCity extends StatefulWidget {
+
+class FavoriteCity extends StatefulWidget {
   @override
-  _FavouriteCityState createState() => _FavouriteCityState();
+  _FavoriteCityState createState() => _FavoriteCityState();
 }
 
-class _FavouriteCityState extends State<FavouriteCity> {
- String nameCity ="";
+class _FavoriteCityState extends State<FavoriteCity> {
+
+  var cityName = "";
+  var _currencies = ['Tk','Dollars','Pounds','Others','Currencies'];
+  var _currentItemSelected = "Currencies";
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-      "Favorite city Widget is created"
-    );
     return Container(
-      margin: EdgeInsets.all(20.0),
+      margin: EdgeInsets.all(30.0),
       child: Column(
         children: <Widget>[
-          TextField(onChanged: (String userInput){  //  replace onChanged by onSubmitted
-            setState(() {
-              debugPrint("set state is called , this tells framwork to redraw the favoite widget"); //  debugPrint called for testing pourpos.
-              nameCity = userInput;
-            });
+          TextField(
+            onSubmitted: (String userInput) {
+              setState(() {
+                cityName = userInput;
+              });
+            },
+          ),
+          DropdownButton<String>(
+          items: _currencies.map((String dropDownStringItem){
+            return DropdownMenuItem<String>(
+              value: dropDownStringItem,
+              child: Text(dropDownStringItem),
+            );
+          }).toList(),
+            onChanged: (String newValueSelected){
+            _onDropDownItemSelected(newValueSelected);
+            },
+            value: _currentItemSelected,
+          ),
 
-          },),
+
+
           Padding(
-            padding:EdgeInsets.all(30.0),
-            child:  Text("your best city is $nameCity",style: TextStyle(fontSize: 20),),
-
+            padding: EdgeInsets.all(30.0),
+            child: Text("your best city is $cityName"),
           )
-
-
         ],
       ),
     );
   }
+  void _onDropDownItemSelected(String newValueSelected){
+    setState(() {
+      this._currentItemSelected=newValueSelected;
+    });
+  }
 }
-
-
