@@ -11,10 +11,10 @@ class Home extends StatelessWidget {
       title: 'Stateful Widget',
       home: SafeArea(
           child: Scaffold(
-            appBar: AppBar(
-              title: Text("Stateful App"),
-            ),
-            body: FavoriteCity(),
+        appBar: AppBar(
+          title: Text("Stateful App"),
+        ),
+        body: FavoriteCity(),
       )),
     );
   }
@@ -26,9 +26,10 @@ class FavoriteCity extends StatefulWidget {
 }
 
 class _FavoriteCityState extends State<FavoriteCity> {
-
   var cityName = "";
-  var _currencies = ['Tk','Dollars','Pounds','Others','Currencies'];
+
+  //  DropDown Variable
+  var _currencies = ['Tk', 'Dollars', 'Pounds', 'Others', 'Currencies'];
   var _currentItemSelected = "Currencies";
 
   @override
@@ -44,20 +45,21 @@ class _FavoriteCityState extends State<FavoriteCity> {
               });
             },
           ),
+          //  Here we create dropdown button
           DropdownButton<String>(
-          items: _currencies.map((String dropDownStringItem){
-            return DropdownMenuItem<String>(
-              value: dropDownStringItem,
-              child: Text(dropDownStringItem),
-            );
-          }).toList(),
-            onChanged: (String newValueSelected){
-            _onDropDownItemSelected(newValueSelected);
+            items: _currencies.map((String dropDownStringItem) {
+
+              return DropdownMenuItem<String>(
+                value: dropDownStringItem,
+                child: Text(dropDownStringItem),
+              );
+            }).toList(),
+            onChanged: (String newValueSelected) {
+              _onDropDownItemSelected(newValueSelected);
             },
-            value: _currentItemSelected,
+            value:
+                _currentItemSelected, //  method declare for show current value
           ),
-
-
 
           Padding(
             padding: EdgeInsets.all(30.0),
@@ -67,9 +69,11 @@ class _FavoriteCityState extends State<FavoriteCity> {
       ),
     );
   }
-  void _onDropDownItemSelected(String newValueSelected){
+
+  //  create method for set item
+  void _onDropDownItemSelected(String newValueSelected) {
     setState(() {
-      this._currentItemSelected=newValueSelected;
+      this._currentItemSelected = newValueSelected;
     });
   }
 }
